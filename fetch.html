@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Fetch API</title>
+
+
+
+</head>
+<body>
+
+    <button onclick="getData()">Get</button>
+    <button onclick="putData()">Put</button>
+    <button onclick="postData()">Post</button>
+    <button onclick="deleteData()">Delete</button>
+
+    <script>
+
+    const url = 'https://jsonplaceholder.typicode.com/posts';
+    
+    async function getData(){
+        const data = await fetch(url);
+        const response = await data.json();
+        console.log(response);
+    }
+
+    async function postData() {
+        try {
+            const body = { body: "hi", userId: 2, title: "title"};
+            const data = await fetch(url, {
+            method: 'POST', 
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(body)
+            });
+
+            const response = await data.json();
+            console.log(response);
+        } catch(enoshError) {
+            console.log(err)
+        }
+    }
+
+    async function putData() {
+        const body = { body: "hi2", userId: 2, title: "title2"};
+        const data = await fetch(`${url}/1`, {
+        method: 'PUT', 
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body)
+        });
+
+        const response = await data.json();
+        console.log(response);
+    }
+
+    async function deleteData() {
+        const body = { body: "hi3", userId: 2, title: "title3"};
+        const data = await fetch(`${url}/1`, {
+        method: 'DELETE', 
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body)
+        });
+
+        const response = await data.json();
+        console.log(response);
+    }
+
+    </script>
+
+</body>
+</html>
